@@ -1,0 +1,14 @@
+Timer unit: 1e-06 s
+
+Total time: 4.3e-05 s
+File: <ipython-input-2-e53e5d40ad48>
+Function: lbp at line 1
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     1                                           def lbp(region):
+     2                                               """
+     3                                               Region is a 3x3 ndarray
+     4                                               """
+     5         1           36     36.0     83.7      ret = (region > region[1,1]).astype(int)
+     6         1            7      7.0     16.3      return (2**7)*ret[0,0] + (2**6)*ret[0,1] + (2**5)*ret[0,2] + (2**4)*ret[1,2] + (2**3)*ret[2,2] +            (2**2)*ret[2,1] + (2**1)*ret[2,0] + (2**0)*ret[1,0]
