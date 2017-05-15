@@ -1,0 +1,19 @@
+Timer unit: 1e-06 s
+
+Total time: 46.5084 s
+File: <ipython-input-2-e53e5d40ad48>
+Function: lbp_histogram at line 21
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+    21                                           def lbp_histogram(image):
+    22                                               """
+    23                                               Compute lbp histogram representation of image
+    24                                               """
+    25         1     30346989 30346989.0     65.3      lbp_image = lbp_representation(image)
+    26         1            2      2.0      0.0      m,n = lbp_image.shape
+    27         1           10     10.0      0.0      hist = np.zeros(256)
+    28      1465          836      0.6      0.0      for i in range(m):
+    29   3576552      1794067      0.5      3.9          for j in range(n):
+    30   3575088     14366506      4.0     30.9              hist[lbp_image[i,j]] += 1
+    31         1            1      1.0      0.0      return hist
