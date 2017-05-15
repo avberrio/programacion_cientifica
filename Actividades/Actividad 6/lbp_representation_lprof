@@ -1,0 +1,18 @@
+Timer unit: 1e-06 s
+
+Total time: 34.3836 s
+File: <ipython-input-2-e53e5d40ad48>
+Function: lbp_representation at line 9
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     9                                           def lbp_representation(image):
+    10                                               """
+    11                                               Compute lbp representation of image
+    12                                               """
+    13         1            4      4.0      0.0      m,n = image.shape
+    14         1           10     10.0      0.0      ret = np.empty((m-2,n-2))
+    15      1465          635      0.4      0.0      for i in range(1,m-1):
+    16   3576552      1874693      0.5      5.5          for j in range(1,n-1):
+    17   3575088     32508209      9.1     94.5              ret[i-1,j-1] = lbp(image[i-1:i+2, j-1:j+2])
+    18         1            1      1.0      0.0      return ret
