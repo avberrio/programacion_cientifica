@@ -1,0 +1,49 @@
+Timer unit: 1e-06 s
+
+Total time: 0 s
+File: <ipython-input-67-5f5525527c84>
+Function: next_generation at line 1
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+     1                                           @numba.jit()
+     2                                           def next_generation(sample, generations=1):
+     3                                               historic_record = list()
+     4                                               historic_record.append(sample)
+     5                                               if generations == 0:
+     6                                                   return historic_record
+     7                                               today = np.copy(sample)
+     8                                               for generation in range(generations):
+     9                                                   next_g = np.zeros(sample.shape)
+    10                                                   for i in range(sample.shape[0]):
+    11                                                       upper_bound = i - 1
+    12                                                       lower_bound = i + 2
+    13                                                       if upper_bound < 0:
+    14                                                           upper_bound = 0
+    15                                                       if lower_bound > sample.shape[0]:
+    16                                                           lower_bound = sample.shape[0]
+    17                                                       for j in range(sample.shape[1]):
+    18                                                           left_bound = j - 1
+    19                                                           right_bound = j + 2
+    20                                                           if left_bound < 0:
+    21                                                               left_bound = 0
+    22                                                           if right_bound > sample.shape[1]:
+    23                                                               right_bound = sample.shape[1]
+    24                                                               
+    25                                                           # Obtenemos la cantidad de células vivas alrededor de la de interés
+    26                                                           live = np.sum(today[upper_bound:lower_bound, left_bound:right_bound] - today[i, j])
+    27                                                           
+    28                                                           # Importante destacar que restamos today[i, j] porque de lo contrario estaríamos incluyendo a esta
+    29                                                           # célula.
+    30                                                           
+    31                                                           if today[i, j] == 1 and live > 3:
+    32                                                               next_g[i, j] = 0
+    33                                                           elif today[i, j] == 1 and (live == 2 or live == 3):
+    34                                                               next_g[i, j] = 1
+    35                                                           elif today[i, j] == 1 and live < 2:
+    36                                                               next_g[i, j] = 0
+    37                                                           elif today[i, j] == 0 and live == 3:
+    38                                                               next_g[i, j] = 1
+    39                                                   today = np.copy(next_g)
+    40                                                   historic_record.append(next_g)
+    41                                               return historic_record
